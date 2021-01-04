@@ -1,21 +1,22 @@
 package com.xl.blog.controller;
 
-import com.xl.blog.service.BookService;
+import com.xl.blog.service.NoteService;
 import com.xl.blog.util.JsonResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+
 /**
  * @author EDZ
  */
 @RestController
-public class LoadBooksController {
+public class loadNotesController {
     @Resource
-    private BookService bookService;
-    @RequestMapping("/book/loadbooks.do")
-    public JsonResult execute(String userId){
-        JsonResult jsonResult = bookService.loadUserBooks(userId);
+    private NoteService noteService;
+    @RequestMapping("/note/loadNotes.do")
+    public JsonResult execute(String bookId){
+        JsonResult jsonResult = noteService.LoadNotes(bookId);
         return jsonResult;
     }
 }

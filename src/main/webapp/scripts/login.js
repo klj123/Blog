@@ -79,6 +79,7 @@ function regist() {
         $("#warning_3 span").html("密码输入不一致");
     }
     if (ok){
+        //3.发送Ajax
         $.ajax({
             url:base_path+"/user/add.do",
             type:"post",
@@ -98,8 +99,6 @@ function regist() {
             }
         })
     }
-
-    //3.发送Ajax
 }
 
 

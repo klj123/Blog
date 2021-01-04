@@ -91,6 +91,16 @@
       <artifactId>aspectjweaver</artifactId>
       <version>1.5.2</version>
     </dependency>
+    <dependency>
+      <groupId>javax.servlet.jsp</groupId>
+      <artifactId>jsp-api</artifactId>
+      <version>2.2.1-b03</version>
+    </dependency>
+    <dependency>
+      <groupId>com.blingblingbang</groupId>
+      <artifactId>ueditor</artifactId>
+      <version>1.1.2</version>
+    </dependency>
   </dependencies>
 
   <build>
