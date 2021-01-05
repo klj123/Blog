@@ -29,4 +29,20 @@ public interface NoteService {
      * @return
      */
     JsonResult update(String title, String body, String noteId);
+
+    /**
+     * 创建笔记
+     * @param userId
+     * @param bookId
+     * @param noteTitle
+     * @return
+     */
+    JsonResult addNote(String userId, String bookId, String noteTitle);
+
+    /**
+     * 删除笔记
+     * @param noteId
+     * @return
+     */
+    JsonResult deleteNote(String noteId);
 }
