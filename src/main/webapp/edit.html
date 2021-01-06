@@ -330,6 +330,15 @@
 				$("#note_ul").on("click",".btn_delete",alertDeleteNoteWindow);
 				//13.删除弹窗确定按钮的绑定
 				$("#can").on("click","#sure_deletenote",deleteNote);
+				//14.移动笔记弹窗的弹出
+				$("#note_ul").on("click",".btn_move",alertMoveNoteWindow);
+				//13.移动弹窗确定按钮的绑定
+				$("#can").on("click","#sure_movenote",moveNote);
+				//15.分享笔记弹窗的弹出
+				$("#note_ul").on("click",".btn_share",alertShareNoteWindow);
+				//16.分享弹窗确定按钮的绑定
+				$("#can").on("click","#sure_sharenote",shareNote);
+
 
 			})
 		</script>

@@ -59,4 +59,10 @@ function closeAlertWindow(){
 	$("#can").empty();//清空对话框内容
 	$(".opacity_bg").hide();//隐藏背景div
 };
+//弹出分享笔记对话框
+function alertShareNoteWindow() {
+	$("#can").load(
+		"alert/alert_share_note.html");
+	$(".opacity_bg").show();
+}
 

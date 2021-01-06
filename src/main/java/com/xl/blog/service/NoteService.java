@@ -45,4 +45,19 @@ public interface NoteService {
      * @return
      */
     JsonResult deleteNote(String noteId);
+
+    /**
+     * 移动笔记
+     * @param noteId
+     * @param bookId
+     * @return
+     */
+    JsonResult moveNote(String noteId, String bookId);
+
+    /**
+     * 分享笔记
+     * @param noteId
+     * @return
+     */
+    JsonResult shareNote(String noteId);
 }
