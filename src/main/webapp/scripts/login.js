@@ -3,6 +3,7 @@ $(function () {
     //括号内只能写login，不能写login()
     $("#login").click(login);
     $("#regist_button").click(regist);
+    $("#logout").click(logout);
 })
 //登录
 function login() {
@@ -48,7 +49,10 @@ function login() {
         })
     }
 }
-//注册
+
+/**
+ * 注册
+ */
 function regist() {
     //1.获取请求参数
     var username = $("#regist_username").val().trim();
@@ -99,6 +103,14 @@ function regist() {
             }
         })
     }
+}
+
+/**
+ * 退出登录
+ */
+function logout() {
+    delCookie("uid");
+    delCookie("uname");
 }
 
 

@@ -2,6 +2,13 @@
  * 加载笔记本对应的笔记
  */
 function loadBookNotes() {
+    $("#pc_part_3").show();
+    $("#pc_part_5").hide();
+    $("#pc_part_2").show();
+    $("#pc_part_4").hide();
+    $("#pc_part_6").hide();
+    $("#pc_part_7").hide();
+    $("#pc_part_8").hide();
     //1.获取请求参数
     //为什么要清空所有，就是note_ul只会加载一次，所以要清空所有
     $("#book_ul").find("a").removeClass("checked");
@@ -284,6 +291,79 @@ function shareNote() {
         },
         error: function () {
             alert("分享笔记异常");
+        }
+    })
+}
+
+/**
+ * 搜索分享笔记模糊查询带分页
+ */
+function searchSharePage(keyword,page) {
+    $.ajax({
+        url: base_path+"/note/search_share.do",
+        type: "post",
+        data: {"keyword":keyword,"page":page},
+        dataType: "json",
+        success: function (result) {
+            /**
+             * 显示pc_part_6  搜索分享的笔记的结果
+             * 隐藏其他版块
+             */
+            $("#pc_part_2").hide();
+            $("#pc_part_4").hide();
+            $("#pc_part_6").show();
+            $("#pc_part_7").hide();
+            $("#pc_part_8").hide();
+            if (result.status == 0){
+                var shares = result.data;
+                for (var i=0; i<shares.length; i++){
+                    var shareId = shares[i].cn_share_id;
+                    var shareTitle = shares[i].cn_share_title;
+                    var lis = '';
+                    lis += '<li class="online">';
+                    lis += '<a>';
+                    lis += '<i class="fa fa-file-text-o" title="online" rel="tooltip-bottom"></i>'+shareTitle+'</a>';
+                    lis += '</li>';
+                    var $lis = $(lis);
+                    $lis.data("shareId",shareId);
+                    $("#pc_part_6 ul").append($lis);
+                }
+            }
+        },
+        error: function () {
+            alert("查询异常");
+        }
+    })
+}
+
+/**
+ * 预览分享笔记
+ */
+function showShareNote() {
+    $("li a").removeClass("checked");
+    $(this).find("a").addClass("checked");
+    //1.获取请求参数,shareId,shareBody
+    var shareId = $(this).data("shareId");
+    //2.参数格式校验
+    //3.发送Ajax
+    $.ajax({
+        url: base_path+"/note/showShareNote.do",
+        type: "post",
+        data: {"shareId":shareId},
+        dataType: "json",
+        success: function (result) {
+            //TODO
+            if (result.status == 0){
+                var share = result.data;
+                $("#noput_note_title").html(share.cn_share_title);
+                $("#noput_note_title").next().html(share.cn_share_body);
+                // $(".clear_margin").find("p").html(share.cn_share_body);
+                $("#pc_part_3").hide();
+                $("#pc_part_5").show();
+            }
+        },
+        error: function () {
+            alert("预览分享笔记异常");
         }
     })
 }

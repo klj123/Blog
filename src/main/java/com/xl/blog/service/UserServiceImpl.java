@@ -78,4 +78,25 @@ public class UserServiceImpl implements UserService {
         }
         return null;
     }
+
+    @Override
+    public JsonResult changePwd(String lastPwd, String newPwd, String userId) throws NoSuchAlgorithmException {
+        JsonResult jsonResult = new JsonResult();
+        User user = userDao.findById(userId);
+        if (!user.getCn_user_password().equals(NoteUtil.md5(lastPwd))){
+            jsonResult.setStatus(1);
+            jsonResult.setMsg("原始密码错误");
+            return jsonResult;
+        }
+        User user1 = User.builder().cn_user_id(userId).cn_user_password(NoteUtil.md5(newPwd)).build();
+        int i = userDao.changePwd(user1);
+        if (i > 0){
+            jsonResult.setStatus(0);
+            jsonResult.setMsg("修改密码成功");
+            return jsonResult;
+        }
+        jsonResult.setStatus(2);
+        jsonResult.setMsg("修改密码失败");
+        return jsonResult;
+    }
 }

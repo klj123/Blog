@@ -35,7 +35,7 @@
                     <ul class="dropdown-menu animated flipInX pull-right" role="menu">
                         <li><a href="Change_password.html"><i class="fa fa-user"></i> 修改密码</a></li>
                         <li class="divider"></li>
-                        <li><a id="logout" href="#" ><i class="fa fa-sign-out"></i> 退出登录</a></li>
+                        <li><a id="logout" href="/log_in.html" ><i class="fa fa-sign-out"></i> 退出登录</a></li>
                     </ul>
                 </div>
             </div>
@@ -292,9 +292,12 @@
 		<script type="text/javascript"src="scripts/basevalue.js"></script>
 		<script type="text/javascript" src="scripts/cookie_util.js"></script>
 		<script type="text/javascript" src="scripts/book.js"></script>
+		<script type="text/javascript" src="scripts/login.js"></script>
 		<script type="text/javascript" src="scripts/note.js"></script>
 		<script type="text/javascript" src="scripts/alert.js"></script>
 		<script>
+			var keyword;
+			var page;
 			//页面加载事件
 			$(function () {
 				/**
@@ -338,7 +341,34 @@
 				$("#note_ul").on("click",".btn_share",alertShareNoteWindow);
 				//16.分享弹窗确定按钮的绑定
 				$("#can").on("click","#sure_sharenote",shareNote);
-
+				//17.搜索分享笔记
+				$("#search_note").keydown(function (event) {
+					//获取时间元对应的key编号
+					var code = event.keyCode;
+					/**
+					 * 如果code == 13成立，说明你按下了enter键
+					 */
+					if (code == 13){
+						//1.获取请求参数
+						keyword = $("#search_note").val().trim();
+						//2.参数格式检验
+						//3.发送Ajax
+						page = 1;
+						//按下enter键清空
+						$("#pc_part_6 ul").empty();
+						searchSharePage(keyword,page);
+					}
+				})
+				//18.绑定更多按钮 page+1
+				$("#more_note").click(function () {
+					page = page + 1;
+					searchSharePage(keyword,page);
+				})
+				//20.预览分享的笔记
+				/**
+				 * 点击pc_part_6 ul li，pc_part_3变为pc_part_5
+				 */
+				$("#pc_part_6 ul").on("click","li",showShareNote);
 
 			})
 		</script>

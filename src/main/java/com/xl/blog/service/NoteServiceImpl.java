@@ -143,4 +143,30 @@ public class NoteServiceImpl implements NoteService {
         jsonResult.setMsg("分享笔记失败");
         return jsonResult;
     }
+
+    @Override
+    public JsonResult searchShareNote(String keyword, int page) {
+        JsonResult jsonResult = new JsonResult();
+        int start = (page - 1) * 5;
+        //模糊查询需要手动加%
+        keyword = "%" + keyword + "%";
+        List<Share> shares = shareDao.findLikeTitle(keyword,start);
+        jsonResult.setStatus(0);
+        jsonResult.setMsg("查询分享笔记成功");
+        jsonResult.setData(shares);
+        return jsonResult;
+    }
+
+    @Override
+    public JsonResult showShareNote(String shareId) {
+        JsonResult jsonResult = new JsonResult();
+        Share share = shareDao.findByShareId(shareId);
+        if (share != null){
+            jsonResult.setStatus(0);
+            jsonResult.setMsg("显示分享笔记成功");
+            jsonResult.setData(share);
+            return jsonResult;
+        }
+        return null;
+    }
 }

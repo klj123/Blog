@@ -60,4 +60,19 @@ public interface NoteService {
      * @return
      */
     JsonResult shareNote(String noteId);
+
+    /**
+     * 查询分享笔记
+     * @param keyword
+     * @param page
+     * @return
+     */
+    JsonResult searchShareNote(String keyword, int page);
+
+    /**
+     * 显示分享笔记（为了之后再预览笔记中起作用）
+     * @param shareId
+     * @return
+     */
+    JsonResult showShareNote(String shareId);
 }

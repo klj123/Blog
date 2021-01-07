@@ -51,7 +51,7 @@ public class NoteUtil {
     public static void main(String[] args) throws NoSuchAlgorithmException {
         String uuid = getUUID();
         System.out.println(uuid);
-        String s = md5("123");
+        String s = md5("123456");
         System.out.println(s);
     }
 }
